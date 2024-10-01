@@ -2,19 +2,15 @@
 {
     class WordGuessingGame
     {
-        //static string[] words = { "apple", "banana", "cherry", "date", "elderberry", "kiwi", "orange", "pineapple", "pear", "strawberrys", "blueberry", "zuccini" };
-
         static string[] schoolSubject = { "math", "language", "science", "sports", "geographic" };
         static string[] fruit = { "apple", "pineapple", "banana", "orange", "kiwi" };
         static string[] socialMedia = { "facebook", "instagram", "spotify", "twitter", "tiktok" };
+        //jagged array
         static string[][] wordsTogether = new string[][] { schoolSubject, fruit, socialMedia };
 
         static Random random = new Random();
-        //static string[] words = wordsTogether[random.Next(0, 3)];
 
 
-
-        
         static void Main(string[] args)
         {
             while (true)
@@ -43,8 +39,8 @@
 
         static void PlayGame()
         {
+            //1[]category 2[] word in category
             int category = random.Next(wordsTogether.Length);
-            //1[]category  2[]words
             string wordToGuess = wordsTogether[category][random.Next(wordsTogether[category].Length)];
             char[] guessedWord = new char[wordToGuess.Length];
             for (int i = 0; i < guessedWord.Length; i++)
@@ -88,7 +84,7 @@
                     Console.WriteLine($"Congratulations! You guessed the word: {wordToGuess}");
                     return;
                 }
-                //give up statement with yes or no
+                //give up statement
                 if (attemptsLeft < 4)
                 {
                     Console.WriteLine("Do you want to give up? (y/n)");
@@ -97,6 +93,17 @@
                     {
                         giveUp = true;
                     }
+                }
+                //shows clue with index 
+                Console.WriteLine("Do you want a clue, type ´clue´ else ´no´");
+                string doYouWantaClue = Console.ReadLine();
+                if (doYouWantaClue == "clue")
+                {
+                    Console.WriteLine(category);
+                }
+                else
+                {
+                    continue;
                 }
             }
             Console.WriteLine($"Game over! The word was: {wordToGuess}");
